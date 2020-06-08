@@ -1,0 +1,142 @@
+{% load static %}
+<html>
+<head>
+	<title>Login Page</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
+<style>
+
+
+#logbody
+{
+    background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.8)),url("{%static 'images/swa.jpg'%}");
+	background-size: cover;
+	background-position: center;
+	color: #efefef !important;
+	background-attachment: fixed;
+	padding-bottom: 60 px;
+    height: 600px !important;
+<!--	padding-top: 350px !important;-->
+
+
+
+
+}
+
+
+.loginbox
+{
+
+width:450px;
+ height: 500px;
+background:transparent;
+color:#fff;
+left:50%;
+top:55%;
+position: absolute;
+transform: translate(-50%,-50%);
+box-sizing: border-box;
+padding: 70px;
+border: 1px solid red;
+
+}
+
+.login{
+ width:100px;
+height:100px;
+border-radius: 40%;
+position:absolute;
+top:-10%;
+left: calc(50% - 50px);
+}
+
+
+h1{
+margin:0;
+padding: 0 0 20px;
+text-align:center;
+font-size:28px;
+
+
+}
+
+
+.loginbox p {
+margin:0;
+padding:2px;
+font-weight:bold;
+
+}
+
+.loginbox input{
+margin-bottom:20px;
+border: none;
+border-bottom:1px solid #fff;
+background:transparent;
+outline:none;
+height:40px;
+width:100%;
+color:yellow;
+font-size: 15px;
+}
+
+.loginbox input[type="submit"]
+{
+border: none;
+outline:none;
+height:40px;
+background:#fb2525;
+color:#fff;
+font-size:18px;
+border-radius:20px;
+}
+
+.loginbox input[type="submit"]:hover
+{
+cursor: pointer;
+background:#ffc107;
+color:#000;
+}
+
+
+.loginbox a{
+text-decoration :none;
+font-size:12px;
+line-height:20px;
+color:darkgrey;
+
+}
+
+
+</style>
+</head>
+<body id="logbody">
+{%include 'nav.html'%}
+	<div class="loginbox">
+		<img src="{%static 'images/login.jpg'%}"class="login">
+			<h1>Login Here</h1>
+			<form method="post">
+				{% csrf_token %}
+			<p>Username</p>
+				<input type ="text" name="username" placeholder="Username" >
+			<p>Password</p>
+				<input type="password" name="password" placeholder="Password">
+				<input type="submit" value= "Login"><br>
+
+				<a href="{% url 'register' %}">Don't have an accoount? </a>
+			</form>
+	</div>
+ 	{% for message in messages %}
+		<h1><p> {{message}}</p></h1>
+	{% endfor %}
+
+</body>
+</html>
+
+
+

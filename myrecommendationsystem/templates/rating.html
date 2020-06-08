@@ -1,0 +1,167 @@
+{%load static%}
+
+
+{%include 'nav.html'%}
+
+<!--    <link rel="stylesheet" type="text/css" href="{%static 'css/bootstrap.min.css'%}">-->
+
+	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' >
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+<style>
+    .contain{
+        border:2px solid blue;
+        height:300px;
+        width:320px;
+        margin: 10px;
+        float:right
+        padding: 5px;
+
+    }
+
+    .row{
+        margin:5px;
+        padding:5px;
+    }
+
+    .img-thumbnail{
+    padding:8px !important;
+    }
+
+    .outerdiv{
+        position:relative;
+        margin:10px;
+    }
+
+
+</style>
+
+
+<section class="outerdiv" >
+<div class="innerdiv">
+    <h1>Please rate this beautiful place . . .</h1>
+ <div class="row">
+
+
+        <div class="col-sm-3 col-md-3 ">
+            <div class="img-thumbnail">
+               <div class="mid"> <h4>{{place.name}}</h4></div>
+                    <div class="img-fluid">
+                    <img src="{{place.image.url}} " class="img-responsive">
+                    </div><br>
+
+                <div class="caption">
+
+                    <!-- View Details -->
+                     <div class="mid"> <a href="{% url 'rating' place.id %}"  class="btn btn-primary btn-sm" role="button">Give Rating . . . </a></div>
+
+
+                </div>
+            </div>
+             <br>
+        </div>
+
+
+
+</div>
+
+
+
+
+
+
+        <div>
+            <strong>{{place.descriptions}}</strong>
+                    </div>
+
+            <div class="col-sm-offset-0 col-sm-8">
+                <form class="form-horizontal" role="search" method="post" action="{% url 'rating' place.id %}" onsubmit="return validateForm()"  name="ratingForm">
+                <div class="form-group">
+                <div class="input-group">
+                 <div class="row">
+                <div class="col-lg-12">
+                      <div class="star-rating">
+                        <span class="fa fa-star-o" data-rating="1"></span>
+                        <span class="fa fa-star-o" data-rating="2"></span>
+                        <span class="fa fa-star-o" data-rating="3"></span>
+                        <span class="fa fa-star-o" data-rating="4"></span>
+                        <span class="fa fa-star-o" data-rating="5"></span>
+
+
+
+
+                   <input type="hidden" name="rating" class="rating-value" value="0" >
+                    {% csrf_token %}
+
+                    </div>
+                </div>
+                </div><br>
+
+
+
+             </div>
+                       <div>
+                <input type="submit" class="btn btn-info" value="submit">
+                        </div>
+             </div>
+            </form>
+
+            </div>
+        </form>
+
+        </div>
+    </div>
+
+
+    </div>
+</div>
+
+</div>
+</div>
+    </div>
+    </section>
+<script type="text/javascript" src="{%static 'js/jquery.min.js'%}"></script>
+
+	<script type="text/javascript" src="{%static 'js/bootstrap.min.js'%}"></script>
+    <script type="text/javascript">
+    var $star_rating = $('.star-rating .fa');
+
+    var SetRatingStar = function() {
+        return $star_rating.each(function() {
+        if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+            return $(this).removeClass('fa-star-o').addClass('fa-star');
+        } else {
+        return $(this).removeClass('fa-star').addClass('fa-star-o');
+        }
+        });
+        };
+
+    $star_rating.on('click', function() {
+    $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+    return SetRatingStar();
+    });
+
+    SetRatingStar();
+    $(document).ready(function() {
+
+    });
+
+</script>
+<script type="text/javascript">
+    function validateForm(){
+    var x = document.forms["ratingForm"]["rating"].value;
+    if(x=="0"){
+        alert("Invalid Input");
+        return false;
+    }
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
